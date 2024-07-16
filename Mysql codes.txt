@@ -1,0 +1,28 @@
+use carinsurence;
+CREATE TABLE Policy (
+    policy_id INT AUTO_INCREMENT PRIMARY KEY,
+    policy_number VARCHAR(50) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    coverage_amount DECIMAL(10, 2) NOT NULL,
+    premium_amount DECIMAL(10, 2) NOT NULL
+);
+CREATE TABLE Customer (
+    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone_number VARCHAR(20),
+    address TEXT
+);
+CREATE TABLE Claim (
+    claim_id INT AUTO_INCREMENT PRIMARY KEY,
+    policy_id INT,
+    customer_id INT,
+    claim_date DATE,
+    status ENUM('submitted', 'processed'),
+    FOREIGN KEY (policy_id) REFERENCES Policy(policy_id),
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+);
+select * from policy;
+
+select * from Customer;
+select * from Claim;
